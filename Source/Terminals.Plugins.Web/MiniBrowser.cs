@@ -38,5 +38,17 @@ namespace Terminals.Connections
             this.homeUrl = url;
             this.webBrowser1.Navigate(this.homeUrl);
         }
+
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            try
+            {
+                webBrowser1.Document.GetElementById("ctl00_TheContentPlaceHolder_UserNameTextBox").SetAttribute("Value", "username");
+                webBrowser1.Document.GetElementById("ctl00_TheContentPlaceHolder_PasswordTextBox").SetAttribute("Value", "password");
+                webBrowser1.Document.GetElementById("ctl00_TheContentPlaceHolder_LoginButton").InvokeMember("submit");
+                webBrowser1.Document.GetElementById("ctl00_TheContentPlaceHolder_LoginButton").InvokeMember("click");
+            }
+            catch { }
+        }
     }
 }
