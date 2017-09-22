@@ -115,7 +115,7 @@ namespace Terminals.Connections
             {
                 this.WinBoxProcess = new Process();
                 this.WinBoxProcess.StartInfo.FileName = "winbox.exe";
-                this.WinBoxProcess.StartInfo.Arguments = string.Format("{0} {1} {2}", this.Favorite.ServerName, credentials.UserName, credentials.Password);
+                this.WinBoxProcess.StartInfo.Arguments = string.Format("{0}:{1} {2} {3}", this.Favorite.ServerName, this.Favorite.Port, credentials.UserName, credentials.Password);
                 this.WinBoxProcess.EnableRaisingEvents = true;
                 this.WinBoxProcess.Exited += this.WinBoxProcessOnExited;
                 this.WinBoxProcess.Start();
