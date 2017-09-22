@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 
@@ -215,7 +216,7 @@ namespace Terminals.Data.DB
             return GetEnumerator();
         }
 
-        #endregion
+        #endregion IEnumerable members
 
         public override string ToString()
         {

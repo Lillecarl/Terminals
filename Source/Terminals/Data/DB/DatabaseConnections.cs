@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.EntityClient;
+using System.Data.Entity.Core.EntityClient;
 using System.IO;
 using System.Linq;
 using Terminals.Configuration;
@@ -14,6 +14,7 @@ namespace Terminals.Data.DB
         private const string PROVIDER = "System.Data.SqlClient";
 
         private static readonly Settings settings = Settings.Instance;
+
         /// <summary>
         /// Load all the EF metadata from current assembly
         /// </summary>
@@ -42,11 +43,11 @@ namespace Terminals.Data.DB
         private static string BuildConnectionString(string providerConnectionString)
         {
             var connectionBuilder = new EntityConnectionStringBuilder
-                                        {
-                                            Provider = PROVIDER,
-                                            Metadata = METADATA,
-                                            ProviderConnectionString = providerConnectionString
-                                        };
+            {
+                Provider = PROVIDER,
+                Metadata = METADATA,
+                ProviderConnectionString = providerConnectionString
+            };
 
             return connectionBuilder.ToString();
         }
@@ -144,8 +145,8 @@ namespace Terminals.Data.DB
             TestConnectionResult connectionResult = TestConnection(connectionString, databasePassword);
             // todo enable database versioning
             // if (!connectionResult.Successful)
-                return new DatabaseValidationResult(connectionResult, Versioning.Version.Max);
-            
+            return new DatabaseValidationResult(connectionResult, Versioning.Version.Max);
+
             return IdentifyDatabaseVersion(connectionString);
         }
 

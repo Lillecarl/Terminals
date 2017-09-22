@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 
 namespace Terminals.Data.DB
 {
@@ -128,7 +129,7 @@ namespace Terminals.Data.DB
         }
 
         /// <summary>
-        /// Switch toUpdate entity state to Modified. 
+        /// Switch toUpdate entity state to Modified.
         /// </summary>
         internal void MarkAsModified<TEntity>(TEntity toUpdate)
             where TEntity : class
@@ -163,7 +164,7 @@ namespace Terminals.Data.DB
                 group.LoadFieldsFromReferences();
             }
         }
-        
+
         internal void DetachGoup(DbGroup group)
         {
             if (group.ParentGroup != null)

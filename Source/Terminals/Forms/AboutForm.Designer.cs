@@ -106,7 +106,7 @@ namespace Terminals
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(486, 13);
             this.lblVersion.TabIndex = 9;
-            this.lblVersion.Text = "Terminals (RDP, VNC, VMRC, RAS, ICA Citrix, Telnet and SSH Supported)";
+            this.lblVersion.Text = "Terminals (RDP, VNC, VMRC, RAS, ICA Citrix, WinBox, Telnet and SSH Supported)";
             this.lblVersion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // linkLabel4

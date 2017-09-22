@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Core;
 using System.Diagnostics;
 using System.Linq;
 
@@ -24,6 +25,7 @@ namespace Terminals.Data
     internal sealed class DataDispatcher
     {
         internal event GroupsChangedEventHandler GroupsChanged;
+
         internal event FavoritesChangedEventHandler FavoritesChanged;
 
         internal event EventHandler<DataErrorEventArgs> ErrorOccurred;
@@ -34,7 +36,7 @@ namespace Terminals.Data
 
         private FavoritesChangedEventArgs favorites;
 
-        private bool DelayedUpdate { get { return this.groups !=null; } }
+        private bool DelayedUpdate { get { return this.groups != null; } }
 
         internal void StartDelayedUpdate()
         {
@@ -239,10 +241,10 @@ namespace Terminals.Data
             if (this.ErrorOccurred == null || this.callStackCounter > 20)
                 throw new ApplicationException("Terminals was not recover from previous data exception");
 
-            var arguments = new DataErrorEventArgs 
-            { 
+            var arguments = new DataErrorEventArgs
+            {
                 Message = message,
-                CallStackFull = this.callStackCounter == 20 
+                CallStackFull = this.callStackCounter == 20
             };
             this.ErrorOccurred(sender, arguments);
         }

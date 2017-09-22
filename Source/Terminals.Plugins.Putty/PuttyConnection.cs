@@ -12,7 +12,7 @@ namespace Terminals.Plugins.Putty
     internal class PuttyConnection : Connection, IFocusable
     {
         private bool windowCaptured;
-        
+
         private Process puttyProcess;
 
         public override bool Connected
@@ -74,7 +74,7 @@ namespace Terminals.Plugins.Putty
 
         private void AdjustWindowStyle(IntPtr handle)
         {
-            uint lStyle = Methods.GetWindowLong(handle, (int) WindowLongParam.GWL_STYLE);
+            uint lStyle = Methods.GetWindowLong(handle, (int)WindowLongParam.GWL_STYLE);
             WindowStyles flagsToDisable = ~(WindowStyles.WS_CAPTION | WindowStyles.WS_THICKFRAME | WindowStyles.WS_MINIMIZE | WindowStyles.WS_MAXIMIZE | WindowStyles.WS_SYSMENU);
             lStyle &= (uint)flagsToDisable;
             Methods.SetWindowLong(handle, (int)WindowLongParam.GWL_STYLE, lStyle);
@@ -97,7 +97,7 @@ namespace Terminals.Plugins.Putty
         {
             this.puttyProcess = new Process();
             this.puttyProcess.StartInfo.FileName = Executables.GetPuttyBinaryPath();
-            
+
             IGuardedSecurity credentials = this.ResolveFavoriteCredentials();
             string arguments = new ArgumentsBuilder(credentials, this.Favorite).Build();
 

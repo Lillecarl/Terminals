@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 
@@ -177,7 +178,7 @@ namespace Terminals.Data.DB
             }
             catch (EntityException exception)
             {
-                this.dispatcher.ReportActionError(RemoveFavorites, favorites, this, exception, 
+                this.dispatcher.ReportActionError(RemoveFavorites, favorites, this, exception,
                     "Unable to remove favorites from group.");
             }
         }

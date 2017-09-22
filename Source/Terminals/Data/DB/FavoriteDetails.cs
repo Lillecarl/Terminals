@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
 using Unified;
 
@@ -17,6 +18,7 @@ namespace Terminals.Data.DB
 
             // cached copies of reference properties
             internal DataDispatcher Dispatcher { get; set; }
+
             internal DbSecurityOptions Security { get; private set; }
             internal DbBeforeConnectExecute ExecuteBeforeConnect { get; private set; }
             internal DbDisplayOptions Display { get; private set; }
@@ -107,7 +109,7 @@ namespace Terminals.Data.DB
                 // partial save possible of of next methods, try to save as much as possible
                 if (this.Loaded)
                     this.Security.Save();
-                
+
                 this.SaveProtocolProperties(database);
             }
 

@@ -266,6 +266,10 @@
       <Project>{278face8-1579-4c13-ae59-1b24a7091cfc}</Project>
       <Name>Terminals.Plugins.Web</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Terminals.Plugins.WinBox\Terminals.Plugins.WinBox.csproj">
+      <Project>{449dc14a-7c3f-4be5-ba39-4afd1c6304e6}</Project>
+      <Name>Terminals.Plugins.WinBox</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Terminals\Terminals.csproj">
       <Project>{9ECB9FEF-89D1-4144-BAD4-5F3218545B2B}</Project>
       <Name>Terminals</Name>

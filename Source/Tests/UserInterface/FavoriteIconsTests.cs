@@ -43,7 +43,8 @@ namespace Tests.UserInterface
 
                 // undefined icons use default icon
                 new Tuple<string, string>(VmrcConnectionPlugin.VMRC, "treeIcon_VMRC"),
-                new Tuple<string, string>(ICAConnectionPlugin.ICA_CITRIX, "treeIcon_ICA Citrix")     
+                new Tuple<string, string>(ICAConnectionPlugin.ICA_CITRIX, "treeIcon_ICA Citrix"),
+                new Tuple<string, string>(WinBoxConnectionPlugin.WinBox, "treeIcon_WinBox")
             };
 
             bool allEquals = testData.All(this.AssertGetTreeviewImageListKey);

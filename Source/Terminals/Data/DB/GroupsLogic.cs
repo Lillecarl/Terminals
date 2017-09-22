@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Core;
+using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
-using System.Data.Objects;
 using System.Linq;
 
 namespace Terminals.Data.DB
@@ -58,7 +59,7 @@ namespace Terminals.Data.DB
             get
             {
                 this.CheckCache();
-                return this.cache.FirstOrDefault(group => 
+                return this.cache.FirstOrDefault(group =>
                     group.Name.Equals(groupName, StringComparison.CurrentCultureIgnoreCase));
             }
         }
@@ -84,7 +85,7 @@ namespace Terminals.Data.DB
                 database.SaveImmediatelyIfRequested();
                 database.Cache.DetachGoup(toAdd);
                 this.cache.Add(toAdd);
-                this.dispatcher.ReportGroupsAdded(new List<IGroup> {toAdd});
+                this.dispatcher.ReportGroupsAdded(new List<IGroup> { toAdd });
             }
         }
 
@@ -99,7 +100,6 @@ namespace Terminals.Data.DB
                 this.dispatcher.ReportActionError(Update, group, this, exception,
                     "Unable to update group in database");
             }
-
         }
 
         private void TryUpdateGroup(IGroup group)
@@ -134,7 +134,7 @@ namespace Terminals.Data.DB
             catch (InvalidOperationException)
             {
                 this.cache.Delete(toUpdate);
-                this.dispatcher.ReportGroupsDeleted(new List<IGroup>(){ toUpdate });
+                this.dispatcher.ReportGroupsDeleted(new List<IGroup>() { toUpdate });
             }
         }
 
@@ -230,7 +230,7 @@ namespace Terminals.Data.DB
         }
 
         /// <summary>
-        /// Call this method after the changes were committed into database, 
+        /// Call this method after the changes were committed into database,
         /// to let the cache in last state as long as possible and ensure, that the commit didn't fail.
         /// </summary>
         private List<IGroup> DeleteFromCache(List<DbGroup> emptyGroups)
@@ -376,7 +376,7 @@ namespace Terminals.Data.DB
             return GetEnumerator();
         }
 
-        #endregion
+        #endregion IEnumerable members
 
         public override string ToString()
         {

@@ -49,7 +49,7 @@ namespace Terminals.Wizard
             this.label2.Size = new System.Drawing.Size(360, 62);
             this.label2.TabIndex = 4;
             this.label2.Text = "Terminals is a multi tab terminal services/remote desktop client.  It also includ" +
-                "es the ability to connect to VNC, VMRC, Telnet, SSH, RAS, and ICA Citrix connect" +
+                "es the ability to connect to VNC, VMRC, Telnet, SSH, RAS, WinBox, and ICA Citrix connect" +
                 "ions.";
             // 
             // label1

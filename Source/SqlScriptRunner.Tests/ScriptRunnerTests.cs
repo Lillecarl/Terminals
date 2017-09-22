@@ -6,17 +6,14 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 
-
 namespace SqlScriptRunner.Tests
 {
     [TestFixture]
     public class ScriptRunnerTests
     {
         [Test]
-        [ExpectedException(typeof(SQLiteException))]
         public void Transaction_Test()
         {
-            
             //Add a table, insert some data, and then crash.
             //this *should* roll back the transaction entirely
             string query = Mother.AddTable();
@@ -26,22 +23,22 @@ namespace SqlScriptRunner.Tests
             query += Mother.MalformedScript();
 
             var scriptRunner = new SqlScriptRunner.ScriptRunner(query, new ScriptProcessing.SqliteScriptProcessor());
-            
+
             using (var connection = new SQLiteConnection(Mother.ConnectionString()))
             {
                 connection.Open();
-                using(var transaction = connection.BeginTransaction())
+                using (var transaction = connection.BeginTransaction())
                 {
                     try
                     {
                         var success = scriptRunner.Execute(connection, transaction);
-                        if(success) transaction.Commit();
+                        if (success) transaction.Commit();
                     }
                     catch (Exception)
                     {
-                        transaction.Rollback();                        
+                        transaction.Rollback();
                     }
-                }                
+                }
             }
 
             //Now that the transaction has failed, lets assert
@@ -54,46 +51,40 @@ namespace SqlScriptRunner.Tests
                 //this should throw our sqliteexception
                 var data = cmd.ExecuteReader();
             }
-
         }
 
         [Test]
         public void Explicit_Script_From_Full_Path()
         {
-
             SortedList<string, string> files = ScriptRunner.ResolveScriptsFromPath(Mother.ScriptsRootDirectory(), "Script1.sql", false, Mother.ResolveEnvironmentDirectory());
-            Assert.IsTrue(files.Count==1);            
-
+            Assert.IsTrue(files.Count == 1);
         }
+
         [Test]
         public void Explicit_Script_From_Relative_Path()
         {
-
             SortedList<string, string> files = ScriptRunner.ResolveScriptsFromPath("Scripts", "Script1.sql", false, Mother.ResolveEnvironmentDirectory());
             Assert.IsTrue(files.Count == 1);
-
         }
+
         [Test]
         public void Explicit_Script_From_WildCard_FileName()
         {
-
             SortedList<string, string> files = ScriptRunner.ResolveScriptsFromPath(Mother.ScriptsRootDirectory(), "*.sql", false, Mother.ResolveEnvironmentDirectory());
             Assert.IsTrue(files.Count == 3);
-
         }
+
         [Test]
         public void Explicit_Script_From_WildCard_FileName_Recursive()
         {
-
             SortedList<string, string> files = ScriptRunner.ResolveScriptsFromPath(Mother.ScriptsRootDirectory(), "*.sql", true, Mother.ResolveEnvironmentDirectory());
             Assert.IsTrue(files.Count == 5);
-
         }
+
         [Test]
         public void ConstructorTest()
         {
             var ScriptRunner = new SqlScriptRunner.ScriptRunner(Mother.AddTable(), new ScriptProcessing.SqliteScriptProcessor());
-
         }
 
         [Test]
@@ -121,6 +112,7 @@ namespace SqlScriptRunner.Tests
 
             Assert.IsTrue(reponse[0] == "B;\n");
         }
+
         [Test]
         public void TestGOProcessor_Breaker()
         {
@@ -133,8 +125,8 @@ namespace SqlScriptRunner.Tests
             {
                 Assert.IsTrue(s.Trim() == "B");
             }
-
         }
+
         [Test]
         public void TestSemiColonProcessor_SimpleReplace()
         {
@@ -144,7 +136,7 @@ namespace SqlScriptRunner.Tests
             d.Add("A", "B");
             IList<string> reponse = p.ProcessScript(test, d);
 
-            Assert.IsTrue(reponse[0]=="B;");
+            Assert.IsTrue(reponse[0] == "B;");
         }
 
         [Test]
@@ -157,11 +149,10 @@ namespace SqlScriptRunner.Tests
             IList<string> reponse = p.ProcessScript(test, d);
             foreach (string s in reponse)
             {
-                Assert.IsTrue(s.Trim() == "B;");    
+                Assert.IsTrue(s.Trim() == "B;");
             }
-            
         }
-        [TestFixtureSetUp]
+
         public void FixtureSetup()
         {
             Mother.DeleteDatabase(Mother.DatabaseFileName());
@@ -180,8 +171,8 @@ namespace SqlScriptRunner.Tests
                 Assert.IsTrue(success);
             }
             Mother.DropTable(Mother.ConnectionString());
-
         }
+
         [Test]
         public void AddTableInsertDataTest()
         {
@@ -207,7 +198,6 @@ namespace SqlScriptRunner.Tests
                     Assert.IsTrue(data[0] != null);
                     Assert.IsNotNull(data[0]);
                 }
-
             }
             Mother.DropTable(Mother.ConnectionString());
         }
@@ -234,7 +224,6 @@ namespace SqlScriptRunner.Tests
                         t.Rollback();
                         throw;
                     }
-
                 }
                 if (success)
                 {
@@ -276,7 +265,6 @@ namespace SqlScriptRunner.Tests
                     ScriptRunner.Parameters.Add("ZVALUE", zValue.ToString());
                     ScriptRunner.Parameters.Add("YVALUE", yValue.ToString());
 
-
                     bool s = ScriptRunner.Execute(connection);
                     Assert.IsTrue(s);
 
@@ -290,17 +278,12 @@ namespace SqlScriptRunner.Tests
                     data.Read();
                     long zValueDB = (long)data[2];
                     Assert.AreEqual(zValueDB, zValue);
-
                 }
-
             }
             Mother.DropTable(Mother.ConnectionString());
-
         }
 
-
         [Test]
-        [ExpectedException(typeof(System.Data.SQLite.SQLiteException))]
         public void BadScript()
         {
             var ScriptRunner = new SqlScriptRunner.ScriptRunner(Mother.MalformedScript(), new ScriptProcessing.SqliteScriptProcessor());
@@ -312,7 +295,6 @@ namespace SqlScriptRunner.Tests
             }
         }
 
-        [TestFixtureTearDown]
         public void FixtureTearDown()
         {
             Mother.DeleteDatabase(Mother.DatabaseFileName());

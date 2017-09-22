@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
-using System.Data.Objects;
 using System.Linq;
 using Terminals.Common.Connections;
 
@@ -30,7 +30,7 @@ namespace Terminals.Data.DB
             this.Favorites = this.Set<DbFavorite>();
             this.Groups = this.Set<DbGroup>();
             this.Security = this.Set<DbSecurityOptions>();
-            
+
             this.Cache = new CacheConnector(this);
         }
 
@@ -108,7 +108,7 @@ namespace Terminals.Data.DB
         }
 
         /// <summary>
-        /// we have to delete the credentials base manually, this property uses lazy creation 
+        /// we have to delete the credentials base manually, this property uses lazy creation
         /// and therefore there is no database constraint
         /// </summary>
         internal void RemoveRedundantCredentialBase(List<DbCredentialBase> redundantCredentialBase)
@@ -162,7 +162,7 @@ namespace Terminals.Data.DB
         }
 
         internal void RefreshEntity<TEntity>(TEntity toUpdate)
-            where TEntity: class
+            where TEntity : class
         {
             this.Entry(toUpdate).Reload();
             ((IObjectContextAdapter)this).ObjectContext.Refresh(RefreshMode.ClientWins, toUpdate);

@@ -1,10 +1,7 @@
-﻿
-using System;
+﻿using System;
 
 namespace Terminals.Native
 {
-
-
     [Flags()]
     public enum WindowExStyles : uint
     {
@@ -35,7 +32,6 @@ namespace Terminals.Native
         WS_EX_COMPOSITED = 0x02000000,
         WS_EX_NOACTIVATE = 0x08000000
     }
-
 
     /// <summary>
     /// Window Styles.
@@ -78,10 +74,10 @@ namespace Terminals.Native
         /// <summary>The window has a horizontal scroll bar.</summary>
         WS_HSCROLL = 0x100000,
 
-        /// <summary>The window is initially maximized.</summary> 
+        /// <summary>The window is initially maximized.</summary>
         WS_MAXIMIZE = 0x1000000,
 
-        /// <summary>The window has a maximize button. Cannot be combined with the WS_EX_CONTEXTHELP style. The WS_SYSMENU style must also be specified.</summary> 
+        /// <summary>The window has a maximize button. Cannot be combined with the WS_EX_CONTEXTHELP style. The WS_SYSMENU style must also be specified.</summary>
         WS_MAXIMIZEBOX = 0x10000,
 
         /// <summary>The window is initially minimized.</summary>
@@ -115,7 +111,7 @@ namespace Terminals.Native
 
         /// <summary>
         /// The window is a control that can receive the keyboard focus when the user presses the TAB key.
-        /// Pressing the TAB key changes the keyboard focus to the next control with the WS_TABSTOP style.  
+        /// Pressing the TAB key changes the keyboard focus to the next control with the WS_TABSTOP style.
         /// You can turn this style on and off to change dialog box navigation. To change this style after a window has been created, use the SetWindowLong function.
         /// For user-created windows and modeless dialogs to work with tab stops, alter the message loop to call the IsDialogMessage function.
         /// </summary>
@@ -170,59 +166,73 @@ namespace Terminals.Native
     [Flags()]
     public enum SetWindowPosFlags : uint
     {
-        /// <summary>If the calling thread and the thread that owns the window are attached to different input queues, 
-        /// the system posts the request to the thread that owns the window. This prevents the calling thread from 
+        /// <summary>If the calling thread and the thread that owns the window are attached to different input queues,
+        /// the system posts the request to the thread that owns the window. This prevents the calling thread from
         /// blocking its execution while other threads process the request.</summary>
         /// <remarks>SWP_ASYNCWINDOWPOS</remarks>
         AsynchronousWindowPosition = 0x4000,
+
         /// <summary>Prevents generation of the WM_SYNCPAINT message.</summary>
         /// <remarks>SWP_DEFERERASE</remarks>
         DeferErase = 0x2000,
+
         /// <summary>Draws a frame (defined in the window's class description) around the window.</summary>
         /// <remarks>SWP_DRAWFRAME</remarks>
         DrawFrame = 0x0020,
-        /// <summary>Applies new frame styles set using the SetWindowLong function. Sends a WM_NCCALCSIZE message to 
-        /// the window, even if the window's size is not being changed. If this flag is not specified, WM_NCCALCSIZE 
+
+        /// <summary>Applies new frame styles set using the SetWindowLong function. Sends a WM_NCCALCSIZE message to
+        /// the window, even if the window's size is not being changed. If this flag is not specified, WM_NCCALCSIZE
         /// is sent only when the window's size is being changed.</summary>
         /// <remarks>SWP_FRAMECHANGED</remarks>
         FrameChanged = 0x0020,
+
         /// <summary>Hides the window.</summary>
         /// <remarks>SWP_HIDEWINDOW</remarks>
         HideWindow = 0x0080,
-        /// <summary>Does not activate the window. If this flag is not set, the window is activated and moved to the 
-        /// top of either the topmost or non-topmost group (depending on the setting of the hWndInsertAfter 
+
+        /// <summary>Does not activate the window. If this flag is not set, the window is activated and moved to the
+        /// top of either the topmost or non-topmost group (depending on the setting of the hWndInsertAfter
         /// parameter).</summary>
         /// <remarks>SWP_NOACTIVATE</remarks>
         DoNotActivate = 0x0010,
-        /// <summary>Discards the entire contents of the client area. If this flag is not specified, the valid 
-        /// contents of the client area are saved and copied back into the client area after the window is sized or 
+
+        /// <summary>Discards the entire contents of the client area. If this flag is not specified, the valid
+        /// contents of the client area are saved and copied back into the client area after the window is sized or
         /// repositioned.</summary>
         /// <remarks>SWP_NOCOPYBITS</remarks>
         DoNotCopyBits = 0x0100,
+
         /// <summary>Retains the current position (ignores X and Y parameters).</summary>
         /// <remarks>SWP_NOMOVE</remarks>
         IgnoreMove = 0x0002,
+
         /// <summary>Does not change the owner window's position in the Z order.</summary>
         /// <remarks>SWP_NOOWNERZORDER</remarks>
         DoNotChangeOwnerZOrder = 0x0200,
-        /// <summary>Does not redraw changes. If this flag is set, no repainting of any kind occurs. This applies to 
-        /// the client area, the nonclient area (including the title bar and scroll bars), and any part of the parent 
-        /// window uncovered as a result of the window being moved. When this flag is set, the application must 
+
+        /// <summary>Does not redraw changes. If this flag is set, no repainting of any kind occurs. This applies to
+        /// the client area, the nonclient area (including the title bar and scroll bars), and any part of the parent
+        /// window uncovered as a result of the window being moved. When this flag is set, the application must
         /// explicitly invalidate or redraw any parts of the window and parent window that need redrawing.</summary>
         /// <remarks>SWP_NOREDRAW</remarks>
         DoNotRedraw = 0x0008,
+
         /// <summary>Same as the SWP_NOOWNERZORDER flag.</summary>
         /// <remarks>SWP_NOREPOSITION</remarks>
         DoNotReposition = 0x0200,
+
         /// <summary>Prevents the window from receiving the WM_WINDOWPOSCHANGING message.</summary>
         /// <remarks>SWP_NOSENDCHANGING</remarks>
         DoNotSendChangingEvent = 0x0400,
+
         /// <summary>Retains the current size (ignores the cx and cy parameters).</summary>
         /// <remarks>SWP_NOSIZE</remarks>
         IgnoreResize = 0x0001,
+
         /// <summary>Retains the current Z order (ignores the hWndInsertAfter parameter).</summary>
         /// <remarks>SWP_NOZORDER</remarks>
         IgnoreZOrder = 0x0004,
+
         /// <summary>Displays the window.</summary>
         /// <remarks>SWP_SHOWWINDOW</remarks>
         ShowWindow = 0x0040,
@@ -230,176 +240,227 @@ namespace Terminals.Native
 
     internal enum CSIDL
     {
-        CSIDL_FLAG_CREATE = (0x8000), // Version 5.0. Combine this CSIDL with any of the following 
-        //CSIDLs to force the creation of the associated folder. 
-        CSIDL_ADMINTOOLS = (0x0030), // Version 5.0. The file system directory that is used to store 
-        // administrative tools for an individual user. The Microsoft 
-        // Management Console (MMC) will save customized consoles to 
+        CSIDL_FLAG_CREATE = (0x8000), // Version 5.0. Combine this CSIDL with any of the following
+
+        //CSIDLs to force the creation of the associated folder.
+        CSIDL_ADMINTOOLS = (0x0030), // Version 5.0. The file system directory that is used to store
+
+        // administrative tools for an individual user. The Microsoft
+        // Management Console (MMC) will save customized consoles to
         // this directory, and it will roam with the user.
-        CSIDL_ALTSTARTUP = (0x001d), // The file system directory that corresponds to the user's 
+        CSIDL_ALTSTARTUP = (0x001d), // The file system directory that corresponds to the user's
+
         // nonlocalized Startup program group.
-        CSIDL_APPDATA = (0x001a), // Version 4.71. The file system directory that serves as a 
+        CSIDL_APPDATA = (0x001a), // Version 4.71. The file system directory that serves as a
+
         // common repository for application-specific data. A typical
-        // path is C:\Documents and Settings\username\Application Data. 
-        // This CSIDL is supported by the redistributable Shfolder.dll 
-        // for systems that do not have the Microsoft® Internet 
+        // path is C:\Documents and Settings\username\Application Data.
+        // This CSIDL is supported by the redistributable Shfolder.dll
+        // for systems that do not have the Microsoft® Internet
         // Explorer 4.0 integrated Shell installed.
-        CSIDL_BITBUCKET = (0x000a), // The virtual folder containing the objects in the user's 
+        CSIDL_BITBUCKET = (0x000a), // The virtual folder containing the objects in the user's
+
         // Recycle Bin.
         CSIDL_CDBURN_AREA = (0x003b), // Version 6.0. The file system directory acting as a staging
-        // area for files waiting to be written to CD. A typical path 
+
+        // area for files waiting to be written to CD. A typical path
         // is C:\Documents and Settings\username\Local Settings\
         // Application Data\Microsoft\CD Burning.
-        CSIDL_COMMON_ADMINTOOLS = (0x002f), // Version 5.0. The file system directory containing 
+        CSIDL_COMMON_ADMINTOOLS = (0x002f), // Version 5.0. The file system directory containing
+
         // administrative tools for all users of the computer.
-        CSIDL_COMMON_ALTSTARTUP = (0x001e), // The file system directory that corresponds to the 
-        // nonlocalized Startup program group for all users. Valid only 
+        CSIDL_COMMON_ALTSTARTUP = (0x001e), // The file system directory that corresponds to the
+
+        // nonlocalized Startup program group for all users. Valid only
         // for Microsoft Windows NT® systems.
-        CSIDL_COMMON_APPDATA = (0x0023), // Version 5.0. The file system directory containing application 
-        // data for all users. A typical path is C:\Documents and 
+        CSIDL_COMMON_APPDATA = (0x0023), // Version 5.0. The file system directory containing application
+
+        // data for all users. A typical path is C:\Documents and
         // Settings\All Users\Application Data.
-        CSIDL_COMMON_DESKTOPDIRECTORY = (0x0019), // The file system directory that contains files and folders 
-        // that appear on the desktop for all users. A typical path is 
-        // C:\Documents and Settings\All Users\Desktop. Valid only for 
+        CSIDL_COMMON_DESKTOPDIRECTORY = (0x0019), // The file system directory that contains files and folders
+
+        // that appear on the desktop for all users. A typical path is
+        // C:\Documents and Settings\All Users\Desktop. Valid only for
         // Windows NT systems.
-        CSIDL_COMMON_DOCUMENTS = (0x002e), // The file system directory that contains documents that are 
-        // common to all users. A typical paths is C:\Documents and 
-        // Settings\All Users\Documents. Valid for Windows NT systems 
-        // and Microsoft Windows® 95 and Windows 98 systems with 
+        CSIDL_COMMON_DOCUMENTS = (0x002e), // The file system directory that contains documents that are
+
+        // common to all users. A typical paths is C:\Documents and
+        // Settings\All Users\Documents. Valid for Windows NT systems
+        // and Microsoft Windows® 95 and Windows 98 systems with
         // Shfolder.dll installed.
         CSIDL_COMMON_FAVORITES = (0x001f), // The file system directory that serves as a common repository
-        // for favorite items common to all users. Valid only for 
+
+        // for favorite items common to all users. Valid only for
         // Windows NT systems.
-        CSIDL_COMMON_MUSIC = (0x0035), // Version 6.0. The file system directory that serves as a 
-        // repository for music files common to all users. A typical 
+        CSIDL_COMMON_MUSIC = (0x0035), // Version 6.0. The file system directory that serves as a
+
+        // repository for music files common to all users. A typical
         // path is C:\Documents and Settings\All Users\Documents\
         // My Music.
-        CSIDL_COMMON_PICTURES = (0x0036), // Version 6.0. The file system directory that serves as a 
-        // repository for image files common to all users. A typical 
+        CSIDL_COMMON_PICTURES = (0x0036), // Version 6.0. The file system directory that serves as a
+
+        // repository for image files common to all users. A typical
         // path is C:\Documents and Settings\All Users\Documents\
         // My Pictures.
-        CSIDL_COMMON_PROGRAMS = (0x0017), // The file system directory that contains the directories for 
+        CSIDL_COMMON_PROGRAMS = (0x0017), // The file system directory that contains the directories for
+
         // the common program groups that appear on the Start menu for
         // all users. A typical path is C:\Documents and Settings\
-        // All Users\Start Menu\Programs. Valid only for Windows NT 
+        // All Users\Start Menu\Programs. Valid only for Windows NT
         // systems.
-        CSIDL_COMMON_STARTMENU = (0x0016), // The file system directory that contains the programs and 
-        // folders that appear on the Start menu for all users. A 
+        CSIDL_COMMON_STARTMENU = (0x0016), // The file system directory that contains the programs and
+
+        // folders that appear on the Start menu for all users. A
         // typical path is C:\Documents and Settings\All Users\
         // Start Menu. Valid only for Windows NT systems.
-        CSIDL_COMMON_STARTUP = (0x0018), // The file system directory that contains the programs that 
-        // appear in the Startup folder for all users. A typical path 
+        CSIDL_COMMON_STARTUP = (0x0018), // The file system directory that contains the programs that
+
+        // appear in the Startup folder for all users. A typical path
         // is C:\Documents and Settings\All Users\Start Menu\Programs\
         // Startup. Valid only for Windows NT systems.
-        CSIDL_COMMON_TEMPLATES = (0x002d), // The file system directory that contains the templates that 
-        // are available to all users. A typical path is C:\Documents 
-        // and Settings\All Users\Templates. Valid only for Windows 
+        CSIDL_COMMON_TEMPLATES = (0x002d), // The file system directory that contains the templates that
+
+        // are available to all users. A typical path is C:\Documents
+        // and Settings\All Users\Templates. Valid only for Windows
         // NT systems.
-        CSIDL_COMMON_VIDEO = (0x0037), // Version 6.0. The file system directory that serves as a 
-        // repository for video files common to all users. A typical 
+        CSIDL_COMMON_VIDEO = (0x0037), // Version 6.0. The file system directory that serves as a
+
+        // repository for video files common to all users. A typical
         // path is C:\Documents and Settings\All Users\Documents\
         // My Videos.
-        CSIDL_CONTROLS = (0x0003), // The virtual folder containing icons for the Control Panel 
+        CSIDL_CONTROLS = (0x0003), // The virtual folder containing icons for the Control Panel
+
         // applications.
-        CSIDL_COOKIES = (0x0021), // The file system directory that serves as a common repository 
-        // for Internet cookies. A typical path is C:\Documents and 
+        CSIDL_COOKIES = (0x0021), // The file system directory that serves as a common repository
+
+        // for Internet cookies. A typical path is C:\Documents and
         // Settings\username\Cookies.
-        CSIDL_DESKTOP = (0x0000), // The virtual folder representing the Windows desktop, the root 
+        CSIDL_DESKTOP = (0x0000), // The virtual folder representing the Windows desktop, the root
+
         // of the namespace.
-        CSIDL_DESKTOPDIRECTORY = (0x0010), // The file system directory used to physically store file 
-        // objects on the desktop (not to be confused with the desktop 
-        // folder itself). A typical path is C:\Documents and 
+        CSIDL_DESKTOPDIRECTORY = (0x0010), // The file system directory used to physically store file
+
+        // objects on the desktop (not to be confused with the desktop
+        // folder itself). A typical path is C:\Documents and
         // Settings\username\Desktop.
-        CSIDL_DRIVES = (0x0011), // The virtual folder representing My Computer, containing 
+        CSIDL_DRIVES = (0x0011), // The virtual folder representing My Computer, containing
+
         // everything on the local computer: storage devices, printers,
-        // and Control Panel. The folder may also contain mapped 
+        // and Control Panel. The folder may also contain mapped
         // network drives.
-        CSIDL_FAVORITES = (0x0006), // The file system directory that serves as a common repository 
+        CSIDL_FAVORITES = (0x0006), // The file system directory that serves as a common repository
+
         // for the user's favorite items. A typical path is C:\Documents
         // and Settings\username\Favorites.
-        CSIDL_FONTS = (0x0014), // A virtual folder containing fonts. A typical path is 
+        CSIDL_FONTS = (0x0014), // A virtual folder containing fonts. A typical path is
+
         // C:\Windows\Fonts.
         CSIDL_HISTORY = (0x0022), // The file system directory that serves as a common repository
+
         // for Internet history items.
         CSIDL_INTERNET = (0x0001), // A virtual folder representing the Internet.
-        CSIDL_INTERNET_CACHE = (0x0020), // Version 4.72. The file system directory that serves as a 
-        // common repository for temporary Internet files. A typical 
+
+        CSIDL_INTERNET_CACHE = (0x0020), // Version 4.72. The file system directory that serves as a
+
+        // common repository for temporary Internet files. A typical
         // path is C:\Documents and Settings\username\Local Settings\
         // Temporary Internet Files.
         CSIDL_LOCAL_APPDATA = (0x001c), // Version 5.0. The file system directory that serves as a data
-        // repository for local (nonroaming) applications. A typical 
+
+        // repository for local (nonroaming) applications. A typical
         // path is C:\Documents and Settings\username\Local Settings\
         // Application Data.
         CSIDL_MYDOCUMENTS = (0x000c), // Version 6.0. The virtual folder representing the My Documents
-        // desktop item. This should not be confused with 
-        // CSIDL_PERSONAL, which represents the file system folder that 
+
+        // desktop item. This should not be confused with
+        // CSIDL_PERSONAL, which represents the file system folder that
         // physically stores the documents.
-        CSIDL_MYMUSIC = (0x000d), // The file system directory that serves as a common repository 
+        CSIDL_MYMUSIC = (0x000d), // The file system directory that serves as a common repository
+
         // for music files. A typical path is C:\Documents and Settings
         // \User\My Documents\My Music.
-        CSIDL_MYPICTURES = (0x0027), // Version 5.0. The file system directory that serves as a 
-        // common repository for image files. A typical path is 
+        CSIDL_MYPICTURES = (0x0027), // Version 5.0. The file system directory that serves as a
+
+        // common repository for image files. A typical path is
         // C:\Documents and Settings\username\My Documents\My Pictures.
-        CSIDL_MYVIDEO = (0x000e), // Version 6.0. The file system directory that serves as a 
-        // common repository for video files. A typical path is 
+        CSIDL_MYVIDEO = (0x000e), // Version 6.0. The file system directory that serves as a
+
+        // common repository for video files. A typical path is
         // C:\Documents and Settings\username\My Documents\My Videos.
-        CSIDL_NETHOOD = (0x0013), // A file system directory containing the link objects that may 
+        CSIDL_NETHOOD = (0x0013), // A file system directory containing the link objects that may
+
         // exist in the My Network Places virtual folder. It is not the
         // same as CSIDL_NETWORK, which represents the network namespace
         // root. A typical path is C:\Documents and Settings\username\
         // NetHood.
         CSIDL_NETWORK = (0x0012), // A virtual folder representing Network Neighborhood, the root
+
         // of the network namespace hierarchy.
         CSIDL_PERSONAL = (0x0005), // The file system directory used to physically store a user's
-        // common repository of documents. A typical path is 
+
+        // common repository of documents. A typical path is
         // C:\Documents and Settings\username\My Documents. This should
-        // be distinguished from the virtual My Documents folder in 
-        // the namespace, identified by CSIDL_MYDOCUMENTS. 
+        // be distinguished from the virtual My Documents folder in
+        // the namespace, identified by CSIDL_MYDOCUMENTS.
         CSIDL_PRINTERS = (0x0004), // The virtual folder containing installed printers.
+
         CSIDL_PRINTHOOD = (0x001b), // The file system directory that contains the link objects that
-        // can exist in the Printers virtual folder. A typical path is 
+
+        // can exist in the Printers virtual folder. A typical path is
         // C:\Documents and Settings\username\PrintHood.
-        CSIDL_PROFILE = (0x0028), // Version 5.0. The user's profile folder. A typical path is 
-        // C:\Documents and Settings\username. Applications should not 
+        CSIDL_PROFILE = (0x0028), // Version 5.0. The user's profile folder. A typical path is
+
+        // C:\Documents and Settings\username. Applications should not
         // create files or folders at this level; they should put their
         // data under the locations referred to by CSIDL_APPDATA or
         // CSIDL_LOCAL_APPDATA.
-        CSIDL_PROFILES = (0x003e), // Version 6.0. The file system directory containing user 
+        CSIDL_PROFILES = (0x003e), // Version 6.0. The file system directory containing user
+
         // profile folders. A typical path is C:\Documents and Settings.
-        CSIDL_PROGRAM_FILES = (0x0026), // Version 5.0. The Program Files folder. A typical path is 
+        CSIDL_PROGRAM_FILES = (0x0026), // Version 5.0. The Program Files folder. A typical path is
+
         // C:\Program Files.
-        CSIDL_PROGRAM_FILES_COMMON = (0x002b), // Version 5.0. A folder for components that are shared across 
-        // applications. A typical path is C:\Program Files\Common. 
-        // Valid only for Windows NT, Windows 2000, and Windows XP 
-        // systems. Not valid for Windows Millennium Edition 
+        CSIDL_PROGRAM_FILES_COMMON = (0x002b), // Version 5.0. A folder for components that are shared across
+
+        // applications. A typical path is C:\Program Files\Common.
+        // Valid only for Windows NT, Windows 2000, and Windows XP
+        // systems. Not valid for Windows Millennium Edition
         // (Windows Me).
-        CSIDL_PROGRAMS = (0x0002), // The file system directory that contains the user's program 
+        CSIDL_PROGRAMS = (0x0002), // The file system directory that contains the user's program
+
         // groups (which are themselves file system directories).
         // A typical path is C:\Documents and Settings\username\
-        // Start Menu\Programs. 
-        CSIDL_RECENT = (0x0008), // The file system directory that contains shortcuts to the 
-        // user's most recently used documents. A typical path is 
-        // C:\Documents and Settings\username\My Recent Documents. 
+        // Start Menu\Programs.
+        CSIDL_RECENT = (0x0008), // The file system directory that contains shortcuts to the
+
+        // user's most recently used documents. A typical path is
+        // C:\Documents and Settings\username\My Recent Documents.
         // To create a shortcut in this folder, use SHAddToRecentDocs.
         // In addition to creating the shortcut, this function updates
-        // the Shell's list of recent documents and adds the shortcut 
+        // the Shell's list of recent documents and adds the shortcut
         // to the My Recent Documents submenu of the Start menu.
         CSIDL_SENDTO = (0x0009), // The file system directory that contains Send To menu items.
+
         // A typical path is C:\Documents and Settings\username\SendTo.
-        CSIDL_STARTMENU = (0x000b), // The file system directory containing Start menu items. A 
+        CSIDL_STARTMENU = (0x000b), // The file system directory containing Start menu items. A
+
         // typical path is C:\Documents and Settings\username\Start Menu.
-        CSIDL_STARTUP = (0x0007), // The file system directory that corresponds to the user's 
-        // Startup program group. The system starts these programs 
+        CSIDL_STARTUP = (0x0007), // The file system directory that corresponds to the user's
+
+        // Startup program group. The system starts these programs
         // whenever any user logs onto Windows NT or starts Windows 95.
         // A typical path is C:\Documents and Settings\username\
         // Start Menu\Programs\Startup.
-        CSIDL_SYSTEM = (0x0025), // Version 5.0. The Windows System folder. A typical path is 
+        CSIDL_SYSTEM = (0x0025), // Version 5.0. The Windows System folder. A typical path is
+
         // C:\Windows\System32.
         CSIDL_TEMPLATES = (0x0015), // The file system directory that serves as a common repository
-        // for document templates. A typical path is C:\Documents 
+
+        // for document templates. A typical path is C:\Documents
         // and Settings\username\Templates.
-        CSIDL_WINDOWS = (0x0024), // Version 5.0. The Windows directory or SYSROOT. This 
-        // corresponds to the %windir% or %SYSTEMROOT% environment 
+        CSIDL_WINDOWS = (0x0024), // Version 5.0. The Windows directory or SYSROOT. This
+
+        // corresponds to the %windir% or %SYSTEMROOT% environment
         // variables. A typical path is C:\Windows.
     }
 
@@ -411,9 +472,9 @@ namespace Terminals.Native
 
     internal enum SFGAO : uint
     {
-        SFGAO_CANCOPY = 0x00000001, // Objects can be copied    
-        SFGAO_CANMOVE = 0x00000002, // Objects can be moved     
-        SFGAO_CANLINK = 0x00000004, // Objects can be linked    
+        SFGAO_CANCOPY = 0x00000001, // Objects can be copied
+        SFGAO_CANMOVE = 0x00000002, // Objects can be moved
+        SFGAO_CANLINK = 0x00000004, // Objects can be linked
         SFGAO_STORAGE = 0x00000008, // supports BindToObject(IID_IStorage)
         SFGAO_CANRENAME = 0x00000010, // Objects can be renamed
         SFGAO_CANDELETE = 0x00000020, // Objects can be deleted
@@ -459,11 +520,14 @@ namespace Terminals.Native
 
     internal enum SHCIDS : uint
     {
-        SHCIDS_ALLFIELDS = 0x80000000, // Compare all the information contained in the ITEMIDLIST 
+        SHCIDS_ALLFIELDS = 0x80000000, // Compare all the information contained in the ITEMIDLIST
+
         // structure, not just the display names
-        SHCIDS_CANONICALONLY = 0x10000000, // When comparing by name, compare the system names but not the 
-        // display names. 
+        SHCIDS_CANONICALONLY = 0x10000000, // When comparing by name, compare the system names but not the
+
+        // display names.
         SHCIDS_BITMASK = 0xFFFF0000,
+
         SHCIDS_COLUMNMASK = 0x0000FFFF
     }
 
@@ -485,25 +549,117 @@ namespace Terminals.Native
 
     internal enum PrinterActions
     {
-        PRINTACTION_OPEN = 0, // The printer specified by the name in lpBuf1 will be opened. 
-        // lpBuf2 is ignored. 
+        PRINTACTION_OPEN = 0, // The printer specified by the name in lpBuf1 will be opened.
+
+        // lpBuf2 is ignored.
         PRINTACTION_PROPERTIES = 1, // The properties for the printer specified by the name in lpBuf1
+
         // will be displayed. lpBuf2 can either be NULL or specify.
-        PRINTACTION_NETINSTALL = 2, // The network printer specified by the name in lpBuf1 will be 
-        // installed. lpBuf2 is ignored. 
+        PRINTACTION_NETINSTALL = 2, // The network printer specified by the name in lpBuf1 will be
+
+        // installed. lpBuf2 is ignored.
         PRINTACTION_NETINSTALLLINK = 3, // A shortcut to the network printer specified by the name in lpBuf1
-        // will be created. lpBuf2 specifies the drive and path of the folder 
-        // in which the shortcut will be created. The network printer must 
-        // have already been installed on the local computer. 
+
+        // will be created. lpBuf2 specifies the drive and path of the folder
+        // in which the shortcut will be created. The network printer must
+        // have already been installed on the local computer.
         PRINTACTION_TESTPAGE = 4, // A test page will be printed on the printer specified by the name
-        // in lpBuf1. lpBuf2 is ignored. 
+
+        // in lpBuf1. lpBuf2 is ignored.
         PRINTACTION_OPENNETPRN = 5, // The network printer specified by the name in lpBuf1 will be
-        // opened. lpBuf2 is ignored. 
+
+        // opened. lpBuf2 is ignored.
         PRINTACTION_DOCUMENTDEFAULTS = 6, // Microsoft® Windows NT® only. The default document properties for
-        // the printer specified by the name in lpBuf1 will be displayed. 
-        // lpBuf2 is ignored. 
-        PRINTACTION_SERVERPROPERTIES = 7 // Windows NT only. The properties for the server of the printer 
-        // specified by the name in lpBuf1 will be displayed. lpBuf2 
+
+        // the printer specified by the name in lpBuf1 will be displayed.
+        // lpBuf2 is ignored.
+        PRINTACTION_SERVERPROPERTIES = 7 // Windows NT only. The properties for the server of the printer
+
+        // specified by the name in lpBuf1 will be displayed. lpBuf2
         // is ignored.
+    }
+
+    public enum ShowWindowCommands
+    {
+        /// <summary>
+        /// Hides the window and activates another window.
+        /// </summary>
+        Hide = 0,
+
+        /// <summary>
+        /// Activates and displays a window. If the window is minimized or
+        /// maximized, the system restores it to its original size and position.
+        /// An application should specify this flag when displaying the window
+        /// for the first time.
+        /// </summary>
+        Normal = 1,
+
+        /// <summary>
+        /// Activates the window and displays it as a minimized window.
+        /// </summary>
+        ShowMinimized = 2,
+
+        /// <summary>
+        /// Maximizes the specified window.
+        /// </summary>
+        Maximize = 3, // is this the right value?
+
+        /// <summary>
+        /// Activates the window and displays it as a maximized window.
+        /// </summary>
+        ShowMaximized = 3,
+
+        /// <summary>
+        /// Displays a window in its most recent size and position. This value
+        /// is similar to <see cref="Win32.ShowWindowCommand.Normal"/>, except
+        /// the window is not activated.
+        /// </summary>
+        ShowNoActivate = 4,
+
+        /// <summary>
+        /// Activates the window and displays it in its current size and position.
+        /// </summary>
+        Show = 5,
+
+        /// <summary>
+        /// Minimizes the specified window and activates the next top-level
+        /// window in the Z order.
+        /// </summary>
+        Minimize = 6,
+
+        /// <summary>
+        /// Displays the window as a minimized window. This value is similar to
+        /// <see cref="Win32.ShowWindowCommand.ShowMinimized"/>, except the
+        /// window is not activated.
+        /// </summary>
+        ShowMinNoActive = 7,
+
+        /// <summary>
+        /// Displays the window in its current size and position. This value is
+        /// similar to <see cref="Win32.ShowWindowCommand.Show"/>, except the
+        /// window is not activated.
+        /// </summary>
+        ShowNA = 8,
+
+        /// <summary>
+        /// Activates and displays the window. If the window is minimized or
+        /// maximized, the system restores it to its original size and position.
+        /// An application should specify this flag when restoring a minimized window.
+        /// </summary>
+        Restore = 9,
+
+        /// <summary>
+        /// Sets the show state based on the SW_* value specified in the
+        /// STARTUPINFO structure passed to the CreateProcess function by the
+        /// program that started the application.
+        /// </summary>
+        ShowDefault = 10,
+
+        /// <summary>
+        ///  <b>Windows 2000/XP:</b> Minimizes a window, even if the thread
+        /// that owns the window is not responding. This flag should only be
+        /// used when minimizing windows from a different thread.
+        /// </summary>
+        ForceMinimize = 11
     }
 }
